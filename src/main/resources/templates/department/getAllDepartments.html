@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="Get All Departments">
+<head>
+    <meta charset="UTF-8">
+    <title>All Departments</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+            padding: 0;
+            background-color: #f0f0f0;
+        }
+
+        h1 {
+            text-align: center;
+            color: #333;
+        }
+
+        table {
+            width: 80%;
+            margin: 20px auto;
+            border-collapse: collapse;
+            background-color: white;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        th, td {
+            padding: 12px 15px;
+            text-align: left;
+            border-bottom: 1px solid #ddd;
+        }
+
+        th {
+            background-color: #f2f2f2;
+        }
+
+        tr:nth-child(even) {
+            background-color: #f2f2f2;
+        }
+
+        a {
+            text-decoration: none;
+            padding: 6px 12px;
+            background-color: #007BFF;
+            color: white;
+            border-radius: 4px;
+        }
+
+        a:hover {
+            background-color: #0056b3;
+        }
+    </style>
+</head>
+<body>
+<h1>All Departments</h1>
+<table>
+    <thead>
+
+    <tr>
+        <th>ID</th>
+        <th>Name</th>
+        <th>Action</th>
+
+        <th>
+            <a th:href="@{/api/departments/create/{hospitalId}(hospitalId=${hospitalId})}">Add New Department</a>
+        </th>
+
+
+
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="department : ${departments}">
+        <td th:text="${department.id}"></td>
+        <td th:text="${department.name}"></td>
+
+
+
+           <td> <a th:href="@{/api/departments/{hospitalId}/enter/(departmentId = ${department.id})}">View all doctors</a></td>
+           <td> <a th:href="@{/api/departments/{departmentId}/delete/(departmentId = ${department.id})}">Delete</a></td>
+        <td> <a th:href="@{/api/departments/{departmentId}/udpate/{departmentId}(departmentId=${hospitalId}, departmentId =  ${department.id})}">Update</a> </td>
+
+    </tr>
+    </tbody>
+</table>
+
+</body>
+</html>

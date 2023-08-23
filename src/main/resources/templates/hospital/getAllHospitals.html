@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Get All</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f5f5f5;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+        }
+
+        table {
+            width: 80%;
+            background-color: white;
+            border-collapse: collapse;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        th, td {
+            padding: 10px;
+            text-align: left;
+        }
+
+        th {
+            background-color: #007BFF;
+            color: white;
+        }
+
+        tr:nth-child(even) {
+            background-color: #f2f2f2;
+        }
+
+        a {
+            display: inline-block;
+            margin: 10px;
+            background-color: #007BFF;
+            color: white;
+            padding: 10px;
+            text-decoration: none;
+            border-radius: 4px;
+            text-align: center;
+        }
+
+        a:hover {
+            background-color: #0056b3;
+        }
+    </style>
+</head>
+
+<body>
+<table>
+    <tr>
+        <th>Name</th>
+        <th>Address</th>
+        <th>Actions</th>
+    </tr>
+
+    <tr th:each="hospital:${allHospitals}">
+        <td th:text="${hospital.getName()}"></td>
+        <td th:text="${hospital.getAddress()}"></td>
+
+        <td>
+
+            <a th:href="@{/api/hospitals/{hospitalId}/update(hospitalId = ${hospital.getId()})}">Update</a>
+            <a th:href="@{/api/hospitals/{hospitalId}/delete(hospitalId=${hospital.getId()})}">Delete</a>
+            <a th:href="@{/api/departments/{hospitalId}(hospitalId=${hospital.getId()})}">View all departments</a>
+
+        </td>
+
+    </tr>
+
+</table>
+
+<a class="btn btn-primary" href="/api/hospitals/new" role="button">Create Hospitals</a>
+
+</body>
+</html>
